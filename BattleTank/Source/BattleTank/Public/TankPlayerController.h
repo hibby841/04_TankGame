@@ -23,4 +23,7 @@ public:
 
 	virtual void BeginPlay() override;
 	
+private:
+
+	bool GetSightRayHitLocation(FVector& HitLocationOUT) const;
 };
