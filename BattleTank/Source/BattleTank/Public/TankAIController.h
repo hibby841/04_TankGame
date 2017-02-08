@@ -19,6 +19,10 @@ public:
 
 	ATank* GetPlayerTank() const;
 
+	// Called when the game starts or when spawned
 	void BeginPlay() override;
+
+	// Called every frame
+	virtual void Tick(float DeltaSeconds) override;
 	
 };
