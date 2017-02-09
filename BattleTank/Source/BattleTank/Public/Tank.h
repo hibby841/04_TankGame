@@ -35,5 +35,6 @@ public:
 private:
 	UStaticMeshComponent* Barrel = nullptr;
 	
-	
+	UPROPERTY(EditAnywhere, Category = Firing)
+	float LaunchSpeed = 1000000;//1000 meters per second TODO find good default
 };
