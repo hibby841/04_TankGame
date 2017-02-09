@@ -44,20 +44,27 @@ void UTankAimingComponent::AimAt(FVector LocationToHit, float LaunchSpeed)
 	FVector LaunchVelocityOUT;
 	FVector ShotStartFrom = Barrel->GetSocketLocation(FName("ProjectileExitLocation"));
 
-	if(UGameplayStatics::SuggestProjectileVelocity(
-		this,
-		LaunchVelocityOUT,
-		ShotStartFrom,
-		LocationToHit,
-		LaunchSpeed,
-		false,
-		0,
-		0,
-		ESuggestProjVelocityTraceOption::DoNotTrace
-		))
+	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity(this,LaunchVelocityOUT,ShotStartFrom,LocationToHit,
+																		LaunchSpeed,
+																		ESuggestProjVelocityTraceOption::DoNotTrace
+																		);
+
+	if(bHaveAimSolution)
 	{
 		auto AimDirection = LaunchVelocityOUT.GetSafeNormal();
-		UE_LOG(LogTemp, Warning, TEXT("Tank: %s Aiming at %s"), *GetOwner()->GetName(), *AimDirection.ToString());
+		MoveBarrelTowards(AimDirection);
 	}
-	//if no solution found do nothing
+
+}
+
+void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
+{
+	///Work out difference between current barrel location and aim direction
+	auto AimAsRotator = AimDirection.Rotation();
+	auto BarrelRotation = Barrel->GetForwardVector().Rotation();
+	auto DifInRotation = AimAsRotator - BarrelRotation;
+	UE_LOG(LogTemp, Warning, TEXT("AimAsRotator: %s"), *AimAsRotator.ToString())
+	///move barrel the right amount this frame
+	///based on max elevation speed, and frame time 
+
 }
