@@ -27,7 +27,13 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* MyInputComponent) override;
 
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
+
 	void AimAt(FVector LocationToHit);
+
+private:
+	UStaticMeshComponent* Barrel = nullptr;
 	
 	
 };
