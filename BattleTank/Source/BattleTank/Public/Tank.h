@@ -40,5 +40,5 @@ private:
 	UTankTurret*Turret = nullptr;
 	
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 1000000;//1000 meters per second TODO find good default
+	float LaunchSpeed = 6000;//600 meters per second
 };

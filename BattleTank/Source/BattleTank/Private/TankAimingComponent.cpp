@@ -85,4 +85,5 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	///move barrel the right amount this frame
 	///based on max elevation speed, and frame time 
 	Barrel->ElevateBarrel(DifInRotation.Pitch);
+	Turret->RotateTurret(DifInRotation.Yaw);
 }
