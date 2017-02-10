@@ -4,9 +4,8 @@
 #include "TankBarrel.h"
 
 
-void UTankBarrel::SetMinAndMaxElevation(float NewMaxElevationInDegrees, float NewMinElevationInDegrees)
+void UTankBarrel::SetMinElevation(float NewMinElevationInDegrees)
 {
-	MaxElevationInDegrees = NewMaxElevationInDegrees;
 	MinElevationInDegrees = NewMinElevationInDegrees;
 }
 
