@@ -35,6 +35,9 @@ public:
 
 	void AimAt(FVector LocationToHit);
 
+	UFUNCTION(BlueprintCallable, Category = Firing)
+	void Fire();
+
 private:
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret*Turret = nullptr;
