@@ -4,6 +4,12 @@
 #include "TankBarrel.h"
 
 
+void UTankBarrel::SetMinAndMaxElevation(float NewMaxElevationInDegrees, float NewMinElevationInDegrees)
+{
+	MaxElevationInDegrees = NewMaxElevationInDegrees;
+	MinElevationInDegrees = NewMinElevationInDegrees;
+}
+
 void UTankBarrel::ElevateBarrel(float RelativeSpeed)
 {
 	auto ElevateChange = (FMath::Clamp<float>(RelativeSpeed, -1.f, 1.f)) * MaxDegreesPerSecond * GetWorld()->DeltaTimeSeconds;
