@@ -2,6 +2,7 @@
 
 #include "BattleTank.h"
 #include "TankBarrel.h"
+#include "TankTurret.h"
 #include "TankAimingComponent.h"
 
 
@@ -36,7 +37,14 @@ void UTankAimingComponent::TickComponent( float DeltaTime, ELevelTick TickType, 
 
 void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
+	if (!BarrelToSet) { return; }
 	Barrel = BarrelToSet;
+}
+
+void UTankAimingComponent::SetTurretReference(UTankTurret * TurretToSet)
+{
+	if (!TurretToSet) { return; }
+	Turret = TurretToSet;
 }
 
 void UTankAimingComponent::AimAt(FVector LocationToHit, float LaunchSpeed)
