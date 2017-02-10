@@ -10,7 +10,7 @@ UTankAimingComponent::UTankAimingComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = true;//TODO should this tick
 
 	// ...
 }
@@ -47,13 +47,23 @@ void UTankAimingComponent::AimAt(FVector LocationToHit, float LaunchSpeed)
 
 	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity(this,LaunchVelocityOUT,ShotStartFrom,LocationToHit,
 																		LaunchSpeed,
-																		ESuggestProjVelocityTraceOption::DoNotTrace
+		                                                                false,
+		                                                                0,
+		                                                                0,
+																		ESuggestProjVelocityTraceOption::DoNotTrace//so many versions later and the bus still here
 																		);
 
 	if(bHaveAimSolution)
 	{
 		auto AimDirection = LaunchVelocityOUT.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
+		auto TimeNow = GetWorld()->GetTimeSeconds();
+		UE_LOG(LogTemp, Warning, TEXT("Time :%f: Aim-Solution Found"), TimeNow);
+	}
+	else
+	{
+		auto TimeNow = GetWorld()->GetTimeSeconds();
+		UE_LOG(LogTemp, Warning, TEXT("Time :%f: No Aim-Solution Found"), TimeNow);
 	}
 
 }
@@ -66,6 +76,5 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	auto DifInRotation = AimAsRotator - BarrelRotation;
 	///move barrel the right amount this frame
 	///based on max elevation speed, and frame time 
-
-	Barrel->ElevateBarrel(5.f);
+	Barrel->ElevateBarrel(DifInRotation.Pitch);
 }
