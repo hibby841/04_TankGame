@@ -3,7 +3,9 @@
 #include "BattleTank.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
+#include "TankPlayerController.h"
 #include "TankAimingComponent.h"
+
 
 
 // Sets default values for this component's properties
@@ -58,7 +60,7 @@ void UTankAimingComponent::AimAt(FVector LocationToHit, float LaunchSpeed)
 		                                                                false,
 		                                                                0,
 		                                                                0,
-																		ESuggestProjVelocityTraceOption::DoNotTrace//so many versions later and the bus still here
+																		ESuggestProjVelocityTraceOption::DoNotTrace//so many versions later and the bugs still here
 																		);
 
 	if(bHaveAimSolution)
@@ -66,7 +68,20 @@ void UTankAimingComponent::AimAt(FVector LocationToHit, float LaunchSpeed)
 		auto AimDirection = LaunchVelocityOUT.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
 	}
+	else
+	{
+		FRotator LookDirOUT;
+		FVector Location;
+		auto *player = GetWorld()->GetFirstPlayerController();
+		player->GetPlayerViewPoint(Location, LookDirOUT);
+		MoveBarrelTowards(LookDirOUT.Vector());
+	}
 
+}
+
+void UTankAimingComponent::AimAtForSky(FVector LookDir)
+{
+	MoveBarrelTowards(LookDir);
 }
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
@@ -80,3 +95,5 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	Barrel->ElevateBarrel(DifInRotation.Pitch);
 	Turret->RotateTurret(DifInRotation.Yaw);
 }
+
+

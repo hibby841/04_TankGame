@@ -36,6 +36,8 @@ public:
 
 	void AimAt(FVector LocationToHit);
 
+	void AimAtForSky(FVector LookDir);
+
 	UFUNCTION(BlueprintCallable, Category = Firing)
 	void Fire();
 
@@ -44,10 +46,17 @@ private:
 	UTankTurret*Turret = nullptr;
 	
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 6000;//600 meters per second
+	float LineTraceSpeed = 6000;//600 meters per second
+
+	UPROPERTY(EditAnywhere, Category = Firing)
+	float ProjectileLaunchSpeed = 2000;//200 meters per second
 
 	UPROPERTY(EditAnywhere, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
+
+	float LastFireTime = 0.0;
+
+	float ReloadTime = 5.0;
 
 	//local barrel reference for spawning projectiles
 	UTankBarrel* Barrel = nullptr;

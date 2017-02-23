@@ -21,6 +21,8 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void BeginPlay() override;
+
+	bool GetLookDirection(FVector &LookDirectionOUT) const;//needed public to allow aiming at sky
 	
 private:
 
@@ -38,8 +40,6 @@ private:
 	float LineTraceRange = 1000000.f;
 
 	bool GetLookDirectionHitLocation(FVector LookDirection, FVector &HitLocationOUT) const;
-
-	bool GetLookDirection(FVector2D ScreenLocation, FVector &LookDirectionOUT) const;
 
 	bool GetSightRayHitLocation(FVector& HitLocationOUT) const;
 };

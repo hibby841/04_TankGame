@@ -30,6 +30,8 @@ public:
 
 	void AimAt(FVector LocationToHit, float LaunchSpeed);
 
+	void AimAtForSky(FVector LookDir);
+
 private:
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret*Turret = nullptr;
