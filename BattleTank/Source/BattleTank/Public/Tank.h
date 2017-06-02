@@ -38,6 +38,8 @@ public:
 private:
 
 	UTankTurret*Turret = nullptr;
+
+	virtual void BeginPlay() override;
 	
 	UPROPERTY(EditAnywhere, Category = "Firing")
 	float LineTraceSpeed = 6000;//600 meters per second

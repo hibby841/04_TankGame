@@ -29,6 +29,9 @@ protected:
 		UFUNCTION(BlueprintCallable, Category = "Setup")
 		ATank* GetControlledTank() const;
 
+		UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+		void FoundAimingComp(UTankAimingComponent *AimingComp);
+
 private:
 
 	void AimTowardsCrosshair();

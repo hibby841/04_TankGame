@@ -39,10 +39,11 @@ public:
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "FiringState")
-	EFiringStatus FiringState = EFiringStatus::Reloading;
+	EFiringStatus FiringState = EFiringStatus::LockedOnAimpoint;
 
 private:
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret*Turret = nullptr;
+
 	void MoveBarrelTowards(FVector AimDirection);
 };
