@@ -1,9 +1,11 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright SpaceFerrIT Sudios Ltd.
 
 #pragma once
 
 #include "GameFramework/NavMovementComponent.h"
 #include "TankMovementComponent.generated.h"
+
+class UTankTracks;
 
 /**
  * 
@@ -15,10 +17,20 @@ class BATTLETANK_API UTankMovementComponent : public UNavMovementComponent
 
 public:
 
-	UTankMovementComponent();
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	void Initialize(UTankTracks *LeftTrackToSet, UTankTracks *RightTrackToSet);
 
-	UFUNCTION(BlueprintCallable, Category = Input)
+	UFUNCTION(BlueprintCallable, Category = "Input")
 	void IntendMoveForward(float Throw);
+
+	UFUNCTION(BlueprintCallable, Category = "Input")
+	void IntendTurnRight(float Throw);
 	
-	
+private:
+
+	//Called from the pathfinding logic by the AI controllers.
+	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
+
+	UTankTracks* LeftTrack = nullptr;
+	UTankTracks* RightTrack = nullptr;
 };

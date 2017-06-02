@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright SpaceFerrIT Sudios Ltd.
 
 #pragma once
 
@@ -24,4 +24,8 @@ private:
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
 	
+	//how close can AI get
+	float AcceptanceRadius = 3000;
+
+
 };

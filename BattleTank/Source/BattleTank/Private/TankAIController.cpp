@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright SpaceFerrIT Sudios Ltd.
 
 #include "BattleTank.h"
 #include "Tank.h"
@@ -32,6 +32,7 @@ void ATankAIController::Tick(float DeltaSeconds)
 	if (PlayersTank)
 	{
 		//TODO move towards player
+		MoveToActor(PlayersTank, AcceptanceRadius);
 
 		//aim at player
 		ControlledTank->AimAt(PlayersTank->GetActorLocation());
