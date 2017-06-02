@@ -24,9 +24,12 @@ public:
 
 	bool GetLookDirection(FVector &LookDirectionOUT) const;//needed public to allow aiming at sky
 	
-private:
+protected:
+	
+		UFUNCTION(BlueprintCallable, Category = "Setup")
+		ATank* GetControlledTank() const;
 
-	ATank* GetControlledTank() const;
+private:
 
 	void AimTowardsCrosshair();
 
