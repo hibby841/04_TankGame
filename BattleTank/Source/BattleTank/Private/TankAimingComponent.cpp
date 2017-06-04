@@ -35,7 +35,7 @@ void UTankAimingComponent::TickComponent( float DeltaTime, ELevelTick TickType, 
 
 void UTankAimingComponent::AimAt(FVector LocationToHit, float LaunchSpeed)
 {
-	if (!Barrel) { return; }
+	if (!ensure(Barrel)) { return; }
 	FVector LaunchVelocityOUT;
 	FVector ShotStartFrom = Barrel->GetSocketLocation(FName("ProjectileExitLocation"));
 
@@ -70,7 +70,7 @@ void UTankAimingComponent::AimAtForSky(FVector LookDir)
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
-	if (!Barrel || !Turret) { return;}
+	if (!ensure(Barrel) || !ensure(Turret)) { return;}
 
 	///Work out difference between current barrel location and aim direction
 	auto AimAsRotator = AimDirection.Rotation();
